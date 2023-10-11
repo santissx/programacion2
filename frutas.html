@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(131, 61, 97);}
+        table {background-color: chartreuse;
+            width: 400px;
+            height: 300px;
+            border: 2px solid black;
+            display:block;
+        margin-left: auto;
+        margin-right: auto;
+            }
+        select {width: 150px;
+        }
+        h1 {text-align: center;
+            color: bisque}
+    </style>
+</head>
+<body >
+    <div id="cuadro">
+        <h1 >VALOR DE LAS FRUTAS</h1>
+
+        <table>
+            <tr>
+                <td><p><strong>Producto: </strong> </p></td>
+                <td>
+                    <select id="producto" name="producto" onchange="elementoSeleccionado();">
+                        <option value="1">Anana</option>
+                        <option value="2">Banana</option>
+                        <option value="3">Manzana</option>
+                        <option value="4">Mandarina</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p><strong>Precio Unitario: </strong></p></td>
+                <td><p id="precioxunidad"></p></td>
+            </tr>
+            <tr>
+                <td><p><strong>Cantidad: </strong></p></td>
+                <td><input type="number" id="cantidad" onchange="calcularCostoTotal();" min="1" value="1"></td>
+            </tr>
+            <tr>
+                <td><p><strong>Costo Total: </strong></p></td>
+                <td><p id="costoTotal"></p></td>
+            </tr>
+        </table>
+    </div>
+
+        <script type="text/javascript">
+            function elementoSeleccionado()
+            {
+            /* Para obtener el valor */
+            var cod = document.getElementById("producto").value;
+            //alert(cod);
+            
+            /* Para obtener el texto */
+            var combo = document.getElementById("producto");
+
+            var indi = combo.selectedIndex; //recupera el indice del elemento seleccionado
+            var seleccion = combo.options[indi].text; //recupera el texto de la lista de opciones
+            
+                // Asignar precios unitarios
+            var precioxunidad = [200, 80, 100, 40]; // Puedes ajustar los precios según tus necesidades
+            var precios = precioxunidad[indi];
+
+            document.getElementById("precioxunidad").innerHTML = "$" + precios.toFixed(2);
+
+            // Calcular costo total
+            calcularCostoTotal();
+        }
+
+        function calcularCostoTotal() {
+            var cantidad = parseInt(document.getElementById("cantidad").value);
+            var combo = document.getElementById("producto");
+            var indi = combo.selectedIndex;
+
+            var precioxunidad = [200, 80, 100, 40]; // Puedes ajustar los precios según tus necesidades
+            var precios = precioxunidad[indi];
+
+            var costoTotal = cantidad * precios;
+
+            document.getElementById("costoTotal").innerHTML = "$" + costoTotal;
+        }
+
+    </script>
+</body>
+</html>
