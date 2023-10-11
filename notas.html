@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+      body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background: linear-gradient(aqua , #ffffff);
+      min-height: 100vh;
+    }
+
+    #result {
+      font-weight: bold;
+      color: green;
+    }
+    h1{ color: #333;}
+
+    .negativo { color: red;}
+    .neutro { color: blue } 
+
+  </style>
+  <title>Verificar Múltiplos</title>
+</head>
+<body>
+  <h1>el resultado de su examen es:</h1>
+  <label for="numero1">Ingrese el primer número:</label>
+  <input type="number" id="numero1" required>
+  <br>
+  <button onclick="nummayor()">Verificar</button>
+  <p id="result"></p>
+
+  <script>
+    function nummayor(num1) {
+        var num1 = parseFloat(document.getElementById('numero1').value);
+        if (isNaN(num1) || num1 < 0 || num1 > 10) {
+        document.getElementById('result').innerHTML = "Ingrese un número válido (entre 0 y 10).";
+      } else if (num1 = 10) {
+        document.getElementById('result').innerHTML = "Felicidades, el resultado de su examen es: Excelente.";
+      } else if (num1 >= 8 && num1 <= 9) {
+        document.getElementById('result').innerHTML = "Bien hecho, el resultado de su examen es: Bien.";
+      } else if (num1 >= 6 && num1 < 7) {
+        document.getElementById('result').innerHTML = '<span class="neutro">' +  "Aprobado, el resultado de su examen es: Suficiente.";
+      } else {
+        document.getElementById('result').innerHTML = '<span class="negativo">' + "El resultado de su examen es: Insuficiente. ¡Esfuérzate más para la próxima!";
+      }
+    }
+        </script>
+</body>
+</html>

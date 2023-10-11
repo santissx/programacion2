@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background: linear-gradient(aqua , #ffffff);
+      min-height: 100vh;
+    }
+
+    #result {
+      font-weight: bold;
+      color: green;
+    }
+    h1{ color: #333;}
+    </style>
+</head>
+<body>
+        <h1>Convertir Texto</h1>
+        <label for="inputTexto">Ingrese una cadena de texto:</label>
+        <input type="text" id="inputTexto" required>
+        <br>
+        <button onclick="convertirTexto()">Convertir</button>
+        <p id="result"></p>
+      
+        <script>
+          function convertirTexto() {
+            var texto = document.getElementById('inputTexto').value;
+            var textoEnMinusculas = texto.toLowerCase();
+            var textoEnMayusculas = texto.toUpperCase();
+      
+            document.getElementById('result').innerHTML = "Texto en minúsculas: " + textoEnMinusculas + "<br>Texto en mayúsculas: " + textoEnMayusculas;
+          }
+        </script>
+</body>
+</html>

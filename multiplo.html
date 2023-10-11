@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background: linear-gradient(aqua , #ffffff);
+      min-height: 100vh;
+    }
+
+    #result {
+      font-weight: bold;
+      color: green;
+    }
+    h1{ color: #333;}
+
+    .negativo { color: red;}
+
+  </style>
+  <title>Verificar Múltiplos</title>
+</head>
+<body>
+  <h1>Verificar Múltiplos</h1>
+  <label for="numero1">Ingrese el primer número:</label>
+  <input type="number" id="numero1" required>
+  <br>
+  <label for="numero2">Ingrese el segundo número:</label>
+  <input type="number" id="numero2" required>
+  <br>
+  <button onclick="verificarMultiplos()">Verificar</button>
+  <p id="result"></p>
+
+  <script>
+    function sonMultiplos(num1, num2) {
+      return num1 % num2 === 0 || num2 % num1 === 0;
+    }
+ 
+    function verificarMultiplos() {
+      var num1 = parseFloat(document.getElementById('numero1').value);
+      var num2 = parseFloat(document.getElementById('numero2').value);
+
+      if (sonMultiplos(num1, num2)) {
+        document.getElementById('result').innerHTML =  '¡Son múltiplos!';
+      } else {
+        document.getElementById('result').innerHTML = '<span class="negativo">' + 'No son múltiplos.';
+      }
+    }
+  </script>
+</body>
+</html>

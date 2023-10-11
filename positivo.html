@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background: linear-gradient(aqua , #ffffff);
+      min-height: 100vh;
+    }
+
+    #result {
+      font-weight: bold;
+      color: green;
+    }
+    h1{ color: #333;}
+
+    .negativo { color: red;}
+    .neutro { color: blue } 
+
+  </style>
+  <title>Verificar Múltiplos</title>
+</head>
+<body>
+  <h1>¿Su número es positivo?</h1>
+  <label for="numero1">Ingrese el primer número:</label>
+  <input type="number" id="numero1" required>
+  <br>
+  <button onclick="signoFunc()">Verificar</button>
+  <p id="result"></p>
+
+  <script>
+    function signoFunc(num1, num2) {
+        var num1 = parseFloat(document.getElementById('numero1').value);
+      if (num1 > 0) {
+        document.getElementById('result').innerHTML = num1 + " es positivo ";
+      } else if (0 > num1) {
+        document.getElementById('result').innerHTML = '<span class="negativo">' + num1 + ' es negativo</span>';
+      } else if(num1 == 0) {
+        document.getElementById('result').innerHTML = '<span class="neutro">' +   num1 + ' es igual a 0, no es negativo ni positivo' ;
+      }
+    }
+    </script>
+</body>
+</html>
