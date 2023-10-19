@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impares</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Impares del 0 al 20</h1>
+    <button onclick="resto()">Mostrar números</button>
+    <br>
+    <h1>Impares con máximo puesto por el usuario</h1>
+    <button onclick="resto2()">Mostrar números</button>
+    <input type="text" id="inputLimite" placeholder="Ingrese el límite">
+    <script>
+        function resto() {
+            for (var num = 0; num < 21; num++) {
+                if (num % 2 !== 0) {
+                    alert(num);
+                }
+            }
+        }
+
+        function resto2() {
+            var num2 = document.getElementById("inputLimite").value;
+            if (isNaN(num2)) {
+                alert("Ingrese un valor válido.");
+            } else {
+                var limite = parseInt(num2);
+                var impares = "";
+
+                for (var num = 0; num <= limite; num++) {
+                    if (num % 2 !== 0) {
+                        if (impares !== "") {
+                            impares += " - ";
+                        }
+                        impares += num;
+                    }
+                }
+
+                if (impares !== "") {
+                    alert("Los números impares del límite " + num2 + " son: " + impares);
+                } else {
+                    alert("No hay números impares en el rango especificado.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

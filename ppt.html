@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, papel, tijera</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Piedra, papel, tijera</h1>
+
+<!-- Botón para iniciar el juego -->
+<button onclick="jugarJuego()" id="boton">Jugar</button>
+
+<!-- Contenedor para mostrar resultados -->
+<div id="resultado"></div>
+
+<script>
+    function obtenerJugadaComputadora() {
+        const opciones = ["piedra", "papel", "tijera"];
+        const indice = Math.floor(Math.random() * 3);
+        return opciones[indice];
+    }
+
+    function determinarGanador(jugadaUsuario, jugadaComputadora) {
+        if (jugadaUsuario === jugadaComputadora) {
+            return "empate";
+        } else if (
+            (jugadaUsuario === "piedra" && jugadaComputadora === "tijera") ||
+            (jugadaUsuario === "papel" && jugadaComputadora === "piedra") ||
+            (jugadaUsuario === "tijera" && jugadaComputadora === "papel")
+        ) {
+            return "usuario";
+        } else {
+            return "computadora";
+        }
+    }
+
+    function actualizarResultadoHTML(html) {
+        document.getElementById('resultado').innerHTML += html;
+    }
+
+    function mostrarAlerta(mensaje) {
+        alert(mensaje);
+    }
+
+    function jugarJuego() {
+        let puntajeUsuario = 0;
+        let puntajeComputadora = 0;
+        let rondasJugadas = 0;
+
+        // Limpiar el contenido anterior
+        document.getElementById('resultado').innerHTML = '';
+
+        while (puntajeUsuario < 30 && puntajeComputadora < 30) {
+            let jugadaUsuario = prompt("Elige: piedra, papel o tijera").toLowerCase();
+
+            if (["piedra", "papel", "tijera"].includes(jugadaUsuario)) {
+                const jugadaComputadora = obtenerJugadaComputadora();
+                const resultadoRonda = determinarGanador(jugadaUsuario, jugadaComputadora);
+
+                // Actualizar el contenido en el contenedor solo si el resultado de la ronda ha cambiado
+                if (resultadoRonda === "empate") {
+                    puntajeUsuario += 2;
+                    puntajeComputadora += 2;
+                    actualizarResultadoHTML(`<p>Ronda ${rondasJugadas + 1}: Empate</p>`);
+                    mostrarAlerta(`Ronda ${rondasJugadas + 1}: Empate`);
+                } else { 
+                    puntajeUsuario += resultadoRonda === "usuario" ? 5 : 0;
+                    puntajeComputadora += resultadoRonda === "computadora" ? 5 : 0;
+
+                    actualizarResultadoHTML(`<p>Ronda ${rondasJugadas + 1}: Usuario eligió ${jugadaUsuario}, Computadora eligió ${jugadaComputadora}</p>`);
+                    actualizarResultadoHTML(`<p>Ganador de la ronda: ${resultadoRonda}<br>Puntaje parcial:<br>Usuario: ${puntajeUsuario}<br>Computadora: ${puntajeComputadora}</p>`);
+                    mostrarAlerta(`Ronda ${rondasJugadas + 1}: Ganador de la ronda: ${resultadoRonda}\nPuntaje parcial:\nUsuario: ${puntajeUsuario}\nComputadora: ${puntajeComputadora}`);
+                }
+
+                rondasJugadas++;            
+            } 
+                else {
+                // Actualizar el contenido en el contenedor
+                actualizarResultadoHTML("<p>Ingrese una opción válida: piedra, papel o tijera</p>");
+                mostrarAlerta("Ingrese una opción válida: piedra, papel o tijera");
+            }
+        }
+
+        if (puntajeUsuario >= 30) {
+            // Actualizar el contenido en el contenedor
+            actualizarResultadoHTML(`<p>¡El usuario ganó! Se jugaron ${rondasJugadas} rondas y la computadora terminó con ${puntajeComputadora} puntos.</p>`);
+            mostrarAlerta(`¡El usuario ganó! Se jugaron ${rondasJugadas} rondas y la computadora terminó con ${puntajeComputadora} puntos.`);
+        } else if (puntajeComputadora >= 30) {
+            // Actualizar el contenido en el contenedor
+            actualizarResultadoHTML(`<p>¡La computadora ganó! Se jugaron ${rondasJugadas} rondas y el usuario terminó con ${puntajeUsuario} puntos.</p>`);
+            mostrarAlerta(`¡La computadora ganó! Se jugaron ${rondasJugadas} rondas y el usuario terminó con ${puntajeUsuario} puntos.`);
+        }
+    }
+</script>
+
+</body>
+</html>
+
